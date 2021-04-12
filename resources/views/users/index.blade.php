@@ -83,6 +83,8 @@
                                                 <input type="submit" value="Delete" class="btn btn-danger btn-sm">
 
                                             </form>
+                                            <a href="{{route('users.show', [$user->id])}}"
+                                                class="btn btn-primary btn-sm">Detail</a>
                                         </td>
                                     </tr>
                                     @endforeach
