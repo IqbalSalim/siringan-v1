@@ -42,6 +42,18 @@
                         <h5>Daftar User</h5>
                     </div>
                     <div class="card-block table-border-style">
+                        <form action="{{route('users.index')}}">
+                            <div class="form-group row">
+                                <label class="col-sm-1 col-form-label"></label>
+                                <div class="col-sm-10 input-group">
+                                    <input type="text" id="name" name="keywoard" placeholder="Filter berdasarkan email"
+                                        value="{{Request::get('keyword')}}" class="form-control">
+                                    <div class="input-group-append">
+                                        <input type="submit" value="Filter" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table class="table table-hover table-sm">
                                 <thead>
