@@ -32,6 +32,11 @@
             </div>
 
             <div class="page-body">
+                @if(session('status'))
+                <div class="alert alert-success">
+                    {{session('status')}}
+                </div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <h5>Daftar User</h5>
@@ -66,8 +71,19 @@
                                             N/A
                                             @endif
                                         </td>
-                                        <td><a href="{{route('users.edit',[$user->id])}}"
-                                                class="btn btn-info text-white btn-sm">Edit</a></td>
+                                        <td>
+                                            <a href="{{route('users.edit',[$user->id])}}"
+                                                class="btn btn-info text-white btn-sm">Edit</a>
+
+                                            <form action="{{ route('users.destroy',[$user->id]) }}"
+                                                onsubmit="return confirm('Hapus user ini?')" class="d-inline"
+                                                method="POST">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+
+                                            </form>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

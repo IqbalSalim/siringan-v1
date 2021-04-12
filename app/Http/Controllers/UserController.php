@@ -110,6 +110,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = \App\Models\User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('users.index')->with('status', 'User berhasil dihapus');
     }
 }
