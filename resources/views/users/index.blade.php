@@ -43,14 +43,41 @@
                     </div>
                     <div class="card-block table-border-style">
                         <form action="{{route('users.index')}}">
-                            <div class="form-group row">
-                                <label class="col-sm-1 col-form-label"></label>
-                                <div class="col-sm-10 input-group">
+                            <div class="form-group row container">
+                                <div class="col-sm-8">
                                     <input type="text" id="name" name="keywoard" placeholder="Filter berdasarkan email"
                                         value="{{Request::get('keyword')}}" class="form-control">
-                                    <div class="input-group-append">
-                                        <input type="submit" value="Filter" class="btn btn-primary">
+                                </div>
+                                <div class="col-sm-4 text-right">
+                                    <div class="checkbox-fade fade-in-primary">
+                                        <label>
+                                            <input {{Request::get('status') == 'ACTIVE' ? 'checked' : ''}}
+                                                class="form-control" type="radio" name="status" id="active"
+                                                value="ACTIVE">
+                                            <span class="cr">
+                                                <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
+                                            </span>
+                                            <span class="text-inverse">Active</span>
+                                        </label>
+                                        <label>
+                                            <input {{Request::get('status') == 'INACTIVE' ? 'checked' : ''}}
+                                                class="form-control" type="radio" name="status" id="inactive"
+                                                value="INACTIVE">
+                                            <span class="cr">
+                                                <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
+                                            </span>
+                                            <span class="text-inverse">Inactive</span>
+                                        </label>
                                     </div>
+                                    <input type="submit" value="Filter" class="btn btn-primary">
+                                </div>
+                                <br>
+                            </div>
+                            <hr>
+                            <div class="container">
+                                <div class="text-right">
+                                    <a href="{{route('users.create')}}" class="btn btn-primary text-right">Tambah
+                                        User</a>
                                 </div>
                             </div>
                         </form>
@@ -63,6 +90,7 @@
                                         <th>Username</th>
                                         <th>Email</th>
                                         <th>Avatar</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -84,6 +112,17 @@
                                             @endif
                                         </td>
                                         <td>
+                                            @if($user->status =="ACTIVE")
+                                            <span class="badge badge-success">
+                                                {{ $user->status }}
+                                            </span>
+                                            @else
+                                            <span class="badge badge-danger">
+                                                {{ $user->status }}
+                                            </span>
+                                            @endif
+                                        </td>
+                                        <td>
                                             <a href="{{route('users.edit',[$user->id])}}"
                                                 class="btn btn-info text-white btn-sm">Edit</a>
 
@@ -101,6 +140,13 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="10">
+                                            {{ $users->links() }}
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

@@ -82,7 +82,6 @@
                                                     class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
                                             <span class="text-inverse">Inactive</span>
                                         </label>
-
                                     </div>
                                 </div>
                             </div>

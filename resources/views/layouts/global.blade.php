@@ -226,7 +226,7 @@
 
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="active">
-                                    <a href="index.html">
+                                    <a href="/home">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -237,7 +237,7 @@
                                 menu-title-theme="theme1">Master</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li>
-                                    <a href="user.html">
+                                    <a href="{{route('users.index')}}">
                                         <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">User</span>
                                         <span class="pcoded-mcaret"></span>
