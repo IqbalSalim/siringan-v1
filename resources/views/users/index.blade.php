@@ -41,7 +41,7 @@
                     <div class="card-header">
                         <h5>Daftar User</h5>
                     </div>
-                    <div class="card-block table-border-style">
+                    <div class="card-body">
                         <form action="{{route('users.index')}}">
                             <div class="form-group row container">
                                 <div class="col-sm-8">

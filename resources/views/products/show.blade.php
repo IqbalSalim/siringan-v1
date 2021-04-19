@@ -1,5 +1,5 @@
 @extends('layouts.global')
-@section('title') Detail User @endsection
+@section('title') Detail Barang @endsection
 @section('content')
 <div class="pcoded-inner-content">
     <div class="main-body">
@@ -11,7 +11,7 @@
                         <div class="page-header-title">
                             <i class="icofont icofont-table bg-c-blue"></i>
                             <div class="d-inline">
-                                <h4>Detail User</h4>
+                                <h4>Detail Barang</h4>
                             </div>
                         </div>
                     </div>
@@ -23,54 +23,39 @@
                                         <i class="icofont icofont-home"></i>
                                     </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#!">User</a></li>
-                                <li class="breadcrumb-item"><a href="#!">Detail User</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Barang</a></li>
+                                <li class="breadcrumb-item">Detail Barang</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
+
             <div class="page-body">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Detail User</h5>
+                        <h5>Detail Barang</h5>
                     </div>
                     <div class="card-body">
-                        <b>Name:</b> <br />
-                        {{$user->name}}
+                        <b>Nama Barang:</b> <br />
+                        {{$product->name}}
+                        <br>
+                        <br>
+                        <b>Harga:</b><br>
+                        {{$product->price}}
+                        <br>
+                        <br>
+                        <b>Merek:</b> <br>
+                        {{$product->brand}}
                         <br><br>
-                        @if($user->avatar)
-                        <img src="{{asset('storage/'. $user->avatar)}}" width="128px" />
-                        @else
-                        No avatar
-                        @endif
-                        <br>
-                        <br>
-                        <b>Username:</b><br>
-                        {{$user->email}}
-                        <br>
-                        <br>
-                        <b>Phone number</b> <br>
-                        {{$user->phone}}
-                        <br><br>
-                        <b>Address</b> <br>
-                        {{$user->address}}
-                        <br>
-                        <br>
-                        <b>Roles:</b> <br>
-                        @foreach (json_decode($user->roles) as $role)
-                        &middot; {{$role}} <br>
-                        @endforeach
                     </div>
                     <div class="card-footer">
                     </div>
                 </div>
             </div>
 
-            <div id="styleSelector">
 
-            </div>
         </div>
     </div>
 </div>

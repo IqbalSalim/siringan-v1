@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductController extends Controller
 {
@@ -11,9 +12,14 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $products = \App\Models\Product::paginate(10);
+        $filterKeyword = $request->get('keywoard');
+        if ($filterKeyword) {
+            $products = \App\Models\Product::where('name', 'LIKE', "%$filterKeyword%")->paginate(10);
+        }
+        return view('products.index', ['products' => $products]);
     }
 
     /**
@@ -55,7 +61,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = \App\Models\Product::findOrFail($id);
+        return view('products.show', ['product' => $product]);
     }
 
     /**
@@ -66,7 +73,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product_to_edit = \App\Models\Product::findOrFail($id);
+        return view('products.edit', ['product' => $product_to_edit]);
     }
 
     /**
@@ -78,7 +86,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $name = $request->get('name');
+        $price = $request->get('price');
+        $brand = $request->get('brand');
+
+        $product = \App\Models\Product::findOrFail($id);
+        $product->name = $name;
+        $product->price = $price;
+        $product->brand = $brand;
+        $product->updated_by = \Auth::user()->id;
+        $product->save();
+        return redirect()->route('products.edit', [$id])->with('status', 'Barang berhasil diupdate');
     }
 
     /**
@@ -89,6 +107,25 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = \App\Models\Product::findOrFail($id);
+        $product->delete();
+        return redirect()->route('products.index')->with('status', 'Barang dipindahkan ke tempat sampah');
+    }
+
+    public function trash()
+    {
+        $deleted_product = \App\Models\Product::onlyTrashed()->paginate(10);
+        return view('products.trash', ['products' => $deleted_product]);
+    }
+
+    public function restore($id)
+    {
+        $product = \App\Models\Product::withTrashed()->findOrFail($id);
+        if ($product->trashed()) {
+            $product->restore();
+        } else {
+            return redirect()->route('products.index')->with('status', 'barang tidak di tempat sampah');
+        }
+        return redirect()->route('products.index')->with('status', 'Barang berhasil dikembalikan');
     }
 }

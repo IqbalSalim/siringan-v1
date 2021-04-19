@@ -198,7 +198,9 @@
                                     <div class="user-details">
                                         <span>{{ Auth::user()->username }}</span>
                                         <span id="more-details">
-                                            {{ Auth::user()->roles }}
+                                            @foreach (json_decode(Auth::user()->roles) as $role)
+                                            {{$role}}
+                                            @endforeach
                                             <i class="ti-angle-down"></i></span>
                                     </div>
                                 </div>
@@ -244,7 +246,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="barang.html">
+                                    <a href="{{route('products.index')}}">
                                         <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
                                         <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Barang</span>
                                         <span class="pcoded-mcaret"></span>

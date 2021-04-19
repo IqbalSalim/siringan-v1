@@ -23,4 +23,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('users', UserController::class);
+Route::get('/products/trash', [App\Http\Controllers\ProductController::class, 'trash'])->name('products.trash');
+Route::get('/products/{id}/restore', [ProductController::class, 'restore'])->name('products.restore');
 Route::resource('products', ProductController::class);
