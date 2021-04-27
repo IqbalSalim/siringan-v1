@@ -1,5 +1,5 @@
 @extends('layouts.global')
-@section('title') Daftar Barang @endsection
+@section('title') Instalasi Penerangan @endsection
 @section('content')
 <div class="pcoded-inner-content">
     <div class="main-body">
@@ -11,7 +11,7 @@
                         <div class="page-header-title">
                             <i class="icofont icofont-table bg-c-blue"></i>
                             <div class="d-inline">
-                                <h4>Daftar Barang</h4>
+                                <h4>Instalasi Penerangan</h4>
                             </div>
                         </div>
                     </div>
@@ -23,7 +23,8 @@
                                         <i class="icofont icofont-home"></i>
                                     </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#!">Barang</a>
+                                <li class="breadcrumb-item"><a href="{{ route('houses.index') }}">Instalasi
+                                        Penerangan</a>
                                 </li>
                             </ul>
                         </div>
@@ -39,37 +40,25 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <h5>Daftar Barang</h5>
+                        <h5>Daftar Rumah</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('products.index')}}">
+                        <form action="{{route('houses.index')}}">
                             <div class="form-group row container">
-                                <div class="input-group col-sm-8">
+                                <div class="input-group">
                                     <input type="text" id="name" name="keywoard"
-                                        placeholder="Filter berdasarkan nama barang" value="{{Request::get('keyword')}}"
-                                        class="form-control">
+                                        placeholder="Filter berdasarkan nama pemilik"
+                                        value="{{Request::get('keyword')}}" class="form-control">
                                     <div class="input-group-append">
                                         <input type="submit" value="Filter" class="btn btn-primary">
                                     </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <ul class="nav nav-pills card-header-pills">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="
-                                        {{route('products.index')}}">Published</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="
-                                        {{route('products.trash')}}">Trash</a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                             <hr>
                             <div class="container">
                                 <div class="text-right">
-                                    <a href="{{route('products.create')}}" class="btn btn-primary text-right">Tambah
-                                        Barang</a>
+                                    <a href="{{route('houses.create')}}" class="btn btn-primary text-right">Tambah
+                                        Rumah</a>
                                 </div>
                             </div>
                         </form>
@@ -78,9 +67,8 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama Barang</th>
-                                        <th>Harga</th>
-                                        <th>Merek</th>
+                                        <th>Nama Pemilik</th>
+                                        <th>Tipe Rumah</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -88,26 +76,24 @@
                                     @php
                                     $no =1;
                                     @endphp
-                                    @foreach ($products as $product)
+                                    @foreach ($houses as $house)
                                     <tr>
                                         <th scope="row">{{ $no++ }}</th>
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ $product->price }}</td>
-                                        <td>{{ $product->brand }}</td>
-
+                                        <td>{{ $house->name }}</td>
+                                        <td>{{ $house->house_type }}</td>
                                         <td>
-                                            <a href="{{route('products.edit',[$product->id])}}"
+                                            <a href="{{route('houses.edit',[$house->id])}}"
                                                 class="btn btn-info text-white btn-sm">Edit</a>
 
-                                            <form action="{{ route('products.destroy',[$product->id]) }}"
-                                                onsubmit="return confirm('Hapus barang ini?')" class="d-inline"
+                                            <form action="{{ route('houses.destroy',[$house->id]) }}"
+                                                onsubmit="return confirm('Hapus data rumah ini?')" class="d-inline"
                                                 method="POST">
                                                 @csrf
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="submit" value="Delete" class="btn btn-danger btn-sm">
 
                                             </form>
-                                            <a href="{{route('products.show', [$product->id])}}"
+                                            <a href="{{route('houses.show', [$house->id])}}"
                                                 class="btn btn-primary btn-sm">Detail</a>
                                         </td>
                                     </tr>
@@ -119,19 +105,19 @@
                                             <nav aria-label="Page navigation example">
                                                 <ul class="pagination">
                                                     <li class="page-item"><a class="page-link"
-                                                            href="{{$products->previousPageUrl()}}">Previous</a></li>
-                                                    @for($i=1;$i<=$products->lastPage();$i++)
-                                                        @if($i == $products->currentPage())
+                                                            href="{{$houses->previousPageUrl()}}">Previous</a></li>
+                                                    @for($i=1;$i<=$houses->lastPage();$i++)
+                                                        @if($i == $houses->currentPage())
                                                         <li class="page-item active"><a class="page-link"
-                                                                href="{{$products->url($i)}}">{{$i}} <span
+                                                                href="{{$houses->url($i)}}">{{$i}} <span
                                                                     class="sr-only">(current)</span></a></li>
                                                         @else
                                                         <li class="page-item"><a class="page-link"
-                                                                href="{{$products->url($i)}}">{{$i}}</a></li>
+                                                                href="{{$houses->url($i)}}">{{$i}}</a></li>
                                                         @endif
                                                         @endfor
                                                         <li class="page-item"><a class="page-link"
-                                                                href="{{$products->nextPageUrl()}}">Next</a></li>
+                                                                href="{{$houses->nextPageUrl()}}">Next</a></li>
                                                 </ul>
                                             </nav>
                                         </td>

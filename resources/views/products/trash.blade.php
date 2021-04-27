@@ -91,8 +91,15 @@
 
                                         <td>
                                             <a href="{{route('products.restore', [$product->id])}}"
-                                                class="btn btn-success">
-                                                Restore</a>
+                                                class="btn btn-success btn-sm">Restore</a>
+                                            <form action="{{ route('products.delete-permanent',[$product->id]) }}"
+                                                method="POST" onsubmit="return confirm('Hapus barang ini?')"
+                                                class="d-inline">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                                            </form>
+
                                         </td>
                                     </tr>
                                     @endforeach

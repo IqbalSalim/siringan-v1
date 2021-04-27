@@ -252,14 +252,23 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{{route('categories.index')}}">
+                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Kategori
+                                            Ruangan</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                             </ul>
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation"
-                                menu-title-theme="theme1">Transaksi</div>
+                                menu-title-theme="theme1">RAB</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li>
-                                    <a href="rab.html">
+                                    <a href="{{ route('houses.index') }}">
                                         <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">RAB</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Instalasi
+                                            Penerangan</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -369,6 +378,7 @@
                 }
             });
         </script>
+        @yield('footer-scripts')
 </body>
 
 </html>

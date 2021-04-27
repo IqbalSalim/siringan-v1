@@ -143,7 +143,24 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="10">
-                                            {{ $users->links() }}
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                    <li class="page-item"><a class="page-link"
+                                                            href="{{$users->previousPageUrl()}}">Previous</a></li>
+                                                    @for($i=1;$i<=$users->lastPage();$i++)
+                                                        @if($i == $users->currentPage())
+                                                        <li class="page-item active"><a class="page-link"
+                                                                href="{{$users->url($i)}}">{{$i}} <span
+                                                                    class="sr-only">(current)</span></a></li>
+                                                        @else
+                                                        <li class="page-item"><a class="page-link"
+                                                                href="{{$users->url($i)}}">{{$i}}</a></li>
+                                                        @endif
+                                                        @endfor
+                                                        <li class="page-item"><a class="page-link"
+                                                                href="{{$users->nextPageUrl()}}">Next</a></li>
+                                                </ul>
+                                            </nav>
                                         </td>
                                     </tr>
                                 </tfoot>

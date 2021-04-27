@@ -10,4 +10,13 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function rooms()
+    {
+        return $this->belongsToMany("App\Models\Room");
+    }
+    public function houses()
+    {
+        return $this->belongsToMany("App\Models\House");
+    }
 }

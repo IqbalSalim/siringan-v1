@@ -128,4 +128,15 @@ class ProductController extends Controller
         }
         return redirect()->route('products.index')->with('status', 'Barang berhasil dikembalikan');
     }
+
+    public function deletePermanent($id)
+    {
+        $product = \App\Models\Product::withTrashed()->findOrFail($id);
+        if (!$product->trashed()) {
+            return redirect()->route('products.index')->with('status', 'Tidak bisa menghapus barang aktiv');
+        } else {
+            $product->forceDelete();
+            return redirect()->route('products.index')->with('status', 'barang berhasil dihapus');
+        }
+    }
 }
